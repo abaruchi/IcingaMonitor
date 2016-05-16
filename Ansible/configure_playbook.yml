@@ -1,0 +1,43 @@
+---
+- hosts: all
+  user: centos
+  become: yes
+  become_user: root
+  vars:
+    password: $1$xyz$2Tf39Fny2BJdNPuwf7opJ.
+    base_dir: "{{ BASE_DIR|default('/home/abaruchi/') }}"
+
+
+  tasks:
+    - name: Add user abaruchi in all hosts
+      user: name=abaruchi shell=/bin/bash groups=cc,adm comment="Master User" password={{password}}
+
+    - name: Adding abaruchi to sudoers
+      lineinfile: dest=/etc/sudoers
+        backup=yes
+        line='abaruchi	ALL=(ALL)	ALL'
+        state=present
+
+    - name: Allow SSH connections with password
+      copy: src=./Templates/sshd_config dest=/etc/ssh/ owner=root group=root mode=644 backup=yes remote_src=yes
+
+    - name: Add Google DNS to all hosts
+      lineinfile: dest=/etc/resolv.conf
+        backup=yes
+        line='nameserver 8.8.8.8'
+        state=present
+
+    - name: Install packages from yum repos
+      yum: name={{ item }} state=latest update_cache=yes
+      with_items:
+        - git
+        - vim
+
+    - name: SSH Restart
+      service: name=sshd pattern=/usr/sbin/sshd state=reloaded
+
+    - name: Clonning GIT repo
+      git: repo=https://github.com/abaruchi/IcingaMonitor.git dest={{ base_dir }}/IsingaMonitor/
+
+    - name: Adjust Timezone to SaoPaulo
+      command: timedatectl set-timezone America/Sao_Paulo
