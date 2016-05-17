@@ -65,10 +65,7 @@
         - docker-io
     
     - name: Install python libs dependences
-      pip: name={{ item }} state=latest
-      with_items:
-        - six
-        - docker-py
+      pip: name=docker-py version=1.1.0
     
     - name: Start docker service
       service: name=docker state=started enabled=yes
