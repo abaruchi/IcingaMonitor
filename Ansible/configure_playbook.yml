@@ -54,6 +54,8 @@
   vars:
     base_dir: "{{ BASE_DIR|default('/home/abaruchi/') }}"
 
+
+  tasks:
     - name: Install packages from yum repos
       yum: name={{ item }} state=latest update_cache=no
       with_items:
