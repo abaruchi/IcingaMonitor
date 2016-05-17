@@ -66,5 +66,13 @@
     
     - name: Start docker service
       service: name=docker state=started enabled=yes
-        
-     
+         
+    - name: Clone a MySQL Git Repo
+      git: repo=https://github.com/fideloper/docker-mysql.git dest={{ base_dir }}/docker-mysql/
+      
+    - name: Build MySQL Image
+      docker:
+        name: phusion/baseimage
+        dockerfile: {{ base_dir }}/docker-mysql/Dockerfile
+        state: present
+        tag: latest
