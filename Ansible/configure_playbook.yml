@@ -41,8 +41,8 @@
 
     - name: Adjust Timezone to SaoPaulo in CentOS 7
       command: timedatectl set-timezone America/Sao_Paulo
-      when: ansible_distribution == "CentoOS" and ansible_distribution_major_version == "7"
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
     
     - name: Adjust Timezone to SaoPaulo in CentOS 6
       command: ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-      when: ansible_distribution == "CentoOS" and ansible_distribution_major_version == "6"
+      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
