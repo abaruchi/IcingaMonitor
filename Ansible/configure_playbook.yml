@@ -72,7 +72,7 @@
       
     - name: Build MySQL Image
       docker:
-        name: phusion/baseimage
-        dockerfile: {{ base_dir }}/docker-mysql/Dockerfile
-        state: present
-        tag: latest
+        name = phusion/baseimage
+        dockerfile = {{ base_dir }}/docker-mysql/Dockerfile
+        state = present
+        tag = latest
