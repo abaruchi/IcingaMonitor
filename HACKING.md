@@ -10,7 +10,8 @@ the docker host which collects and send docker log files to a VM installed at Am
 * Ansible is already [installed](http://docs.ansible.com/ansible/intro_installation.html) in all VMs and the user centos (with sudo privilegies) are
 configured;
 * EPEL repository [installed](https://support.rackspace.com/how-to/install-epel-and-additional-repositories-on-centos-and-red-hat/) 
-in all servers (when using Red Hat based distros).
+in all servers (when using Red Hat based distros);
+* RPMForge repository [installed](https://wiki.centos.org/AdditionalResources/Repositories/RPMForge) in all servers (when using Red Hat based distros);
 
 # Installation Procedure
 
