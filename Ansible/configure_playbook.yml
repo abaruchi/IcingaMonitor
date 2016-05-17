@@ -63,3 +63,8 @@
       yum: name={{ item }} state=latest update_cache=no
       with_items:
         - docker-io
+    
+    - name: Start docker service
+      service: name=docker state=started enabled=yes
+        
+     
