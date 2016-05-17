@@ -71,7 +71,7 @@
       git: repo=https://github.com/fideloper/docker-mysql.git dest={{ base_dir }}/docker-mysql/
       
     - name: Build or Check MySQL Image
-      docker_image: path = "{{ base_dir }}/docker-mysql" name = "phusion/baseimage" state = present
+      docker_image: path="{{ base_dir }}/docker-mysql" name="phusion/baseimage" state=present
     
     - name: Start MySQL Image
       docker: name=mysql image=phusion/baseimage ports=0.0.0.0:3306:3306 state=started
