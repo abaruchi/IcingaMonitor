@@ -44,13 +44,17 @@
       when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
     
     - name: Adjust Timezone to SaoPaulo in CentOS 6
-      command: rm /etc/localtime ; ln -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+      command: ln -f -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
       when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
 
-- hosts: node
-  user: cc
+- hosts: nodes
+  user: centos
   become: yes
   become_user: root
   vars:
     base_dir: "{{ BASE_DIR|default('/home/abaruchi/') }}"
 
+    - name: Install Docker Packages
+      yum: name={{ item }} state=latest update_cache=no
+      with_items:
+        - docker-io
