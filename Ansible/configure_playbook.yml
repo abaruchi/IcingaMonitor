@@ -10,7 +10,7 @@
 
   tasks:
     - name: Add user abaruchi in all hosts
-      user: name=abaruchi shell=/bin/bash groups=cc,adm comment="Master User" password={{password}}
+      user: name=abaruchi shell=/bin/bash comment="Master User" password={{password}}
 
     - name: Adding abaruchi to sudoers
       lineinfile: dest=/etc/sudoers
