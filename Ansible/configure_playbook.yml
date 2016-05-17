@@ -44,7 +44,10 @@
       when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
     
     - name: Adjust Timezone to SaoPaulo in CentOS 6
-      command: ln -f -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+      file:
+        src: /usr/share/zoneinfo/America/Sao_Paulo
+        dest: /etc/localtime
+        state: link
       when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
 
 - hosts: nodes
