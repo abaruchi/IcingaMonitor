@@ -72,10 +72,9 @@
       
     - name: Build or Check MySQL Image
       docker_image:
-        name = phusion/baseimage
-        dockerfile = {{ base_dir }}/docker-mysql/Dockerfile
+        name = "phusion/baseimage"
+        path = "{{ base_dir }}/docker-mysql/"
         state = present
-        tag = latest
     
     - name: Start MySQL Image
       docker:
