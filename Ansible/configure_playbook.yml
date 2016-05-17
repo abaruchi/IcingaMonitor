@@ -19,7 +19,7 @@
         state=present
 
     - name: Allow SSH connections with password
-      copy: src=./Templates/sshd_config dest=/etc/ssh/ owner=root group=root mode=644 backup=yes remote_src=yes
+      copy: src=./Templates/sshd_config dest=/etc/ssh/ owner=root group=root mode=644 backup=yes
 
     - name: Add Google DNS to all hosts
       lineinfile: dest=/etc/resolv.conf
