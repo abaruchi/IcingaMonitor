@@ -64,6 +64,12 @@
       with_items:
         - docker-io
     
+    - name: Install python libs dependences
+      pip: name={{ item }} state=latest
+      with_items:
+        - six
+        - docker-py
+    
     - name: Start docker service
       service: name=docker state=started enabled=yes
          
