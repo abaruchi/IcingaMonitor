@@ -49,5 +49,62 @@ Once you clone the git repository and all hosts are reachable, run the playbook 
 It will deploy two docker with MySQL and Apache web server. Also, it make a basic installation
 of the Icinga.
 
+## MySQL Remote Connection
+
+In order to be able to connect to MySQL you should run the following commands.
+
+```
+# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                              NAMES
+5afda1dcfec3        mysql               "/sbin/my_init"     8 minutes ago       Up 8 minutes        0.0.0.0:3360->3360/tcp, 3306/tcp   mysql
+
+# docker exec -i -t 5afda1dcfec3 /bin/bash
+
+root@5afda1dcfec3:/# mysql -p
+Enter password: \<type_password\>
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 7
+Server version: 5.5.49-0ubuntu0.12.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> GRANT ALL ON *.* to root@'%' IDENTIFIED BY 'root';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> quit
+Bye
+root@5afda1dcfec3:/# exit
+exit
+#
+``` 
+
+After the sequence of these commands you should be able to connect to MySQL from the host.
+
+```
+# mysql -P 3360 -u root -p -h 172.17.42.1
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 6
+Server version: 5.5.49-0ubuntu0.12.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+```
 
 
