@@ -7,7 +7,7 @@ import uploadS3 as s3
 AWS_ACCESS_KEY = sys.argv[1]
 AWS_ACCESS_SECRET_KEY = sys.argv[2]
 
-file = open('/tmp/docker_logfiles.tar.gz', 'rb')
+file = open('/tmp/docker_logfiles.tar.gz', 'r+')
 timestamp = t.strftime("%d_%m_%Y")
 file_name = "docker_logfiles.tar.gz"
 
