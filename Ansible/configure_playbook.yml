@@ -86,6 +86,7 @@
         - Shell/make_backup.sh
         - Python/bkp_file_upload.py
         - Python/log_file_upload.py
+        - Python/uploadS3.py
         
     - name: Create cron job to send files to S3
       cron: name="Job to copy log files to AWS S3." minute="0" hour="7" job="/root/cron_job.sh"
