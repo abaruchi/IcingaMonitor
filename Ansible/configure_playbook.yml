@@ -74,12 +74,13 @@
     - name: Start docker service
       service: name=docker state=started enabled=yes
          
-    - name: Clone a MySQL Git Repo
-      git: repo=https://github.com/fideloper/docker-mysql.git dest={{ base_dir }}/docker-mysql/
-      
     - name: Build or Check MySQL Image
-      docker_image: path="{{ base_dir }}/docker-mysql" name="mysql" state=present
-    
+      docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/MySQL" name="mysql" state=present
+
     - name: Start MySQL Image
       docker: image="mysql" ports=0.0.0.0:3306:3306 command="/sbin/my_init --enable-insecure-key" state=started
+      
+    - name: Build or Check HTTPD Image
+      docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/HTTPD" name="httpd" state=present
+
          
