@@ -1,6 +1,7 @@
 #!/bin/bash
 
 MYSQL_LOG_DIR="/var/log/mysql"
+HTTPD_LOG_DIR="/var/log/httpd"
 LOCAL_DIR="/var/tmp/docker_logs"
 
 # MySQL Docker ID
@@ -20,6 +21,9 @@ mkdir -p $LOCAL_DIR/mysql/
 
 # Copy mysql files from docker to host
 docker cp $mysql_id:$MYSQL_LOG_DIR $LOCAL_DIR/mysql/
+
+# Copy http files from docker to host
+docker cp $httpd_id:$HTTPD_LOG_DIR  $LOCAL_DIR/httpd/
 
 # Compress LogFiles to send to S3
 tar czvf /tmp/docker_logfiles.tar.gz $LOCAL_DIR
