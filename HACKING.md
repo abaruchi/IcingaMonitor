@@ -9,7 +9,6 @@
   4. [MySQL Remote Connection](#mysql-remote-connection)
   5. [Icinga Database](#icinga-database)
   6. [Starting Icinga Daemon](#starting-icinga-daemon)
-___
 
 # Introduction
 This documentation refers to the installation and configuration of a MySQL and an 
