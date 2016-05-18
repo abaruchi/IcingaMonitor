@@ -60,10 +60,7 @@
     - name: Install python libs dependences
       pip: name=docker-py version=1.1.0
 
-    - name: Install tinys3 to AWS Amazon S3
-      pip: name=tinys3
-
-    - name: Install tinys3 to AWS Amazon S3
+    - name: Install boto python lib to connect to AWS S3
       pip: name=boto
 
     - name: Start docker service
@@ -77,4 +74,10 @@
       
     - name: Build or Check HTTPD Image
       docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/HTTPD" name="httpd" state=present
-    
+
+    - name: Start HTTP Image
+      docker: 
+        image: httpd 
+        state: started
+        expose:
+        - 80
