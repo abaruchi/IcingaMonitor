@@ -70,13 +70,13 @@
       docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/MySQL" name="mysql" state=present
 
     - name: Start MySQL Image
-      docker: image="mysql" ports=0.0.0.0:3306:3306 command="/sbin/my_init" state=started
-      
+      docker: image="mysql" name="mydb" ports=0.0.0.0:3306:3306 command="/sbin/my_init" state=started
+         
     - name: Build or Check HTTPD Image
       docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/HTTPD" name="httpd" state=present
 
     - name: Start HTTP Image
-      docker: image="httpd" ports=0.0.0.0:3306:3306 state=started
+      docker: image="httpd" name="myhttpd" ports=0.0.0.0:80:80 state=started
 
     - name: Copy cron script to root home dir
       copy: src=../Scripts/Shell/copy_docker_files.sh dest=/root/ mode="a+x" 
