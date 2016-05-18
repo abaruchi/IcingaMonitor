@@ -18,6 +18,8 @@ RUN echo "mysql-server mysql-server/root_password_again password root" | debconf
 RUN apt-get install -y mysql-server
 
 ADD build/my-small.cnf    /etc/mysql/my.cnf
+ADD build/icinga.sql  /etc/mysql/icinga.sql
+ADD build/icinga_schema.sql  /etc/mysql/icinga_schema.sql
 
 RUN mkdir           /etc/service/mysql
 ADD build/mysql.sh  /etc/service/mysql/run
@@ -28,6 +30,9 @@ RUN chmod -R 755    /var/lib/mysql/
 
 ADD etc/my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
 RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
+RUN mysql -proot -uroot < /etc/mysql/icinga.sql
+RUN mysql -proot -uroot < /etc/mysql/icinga_schema.sql
+
 
 EXPOSE 3306
 # END MySQL Installation
