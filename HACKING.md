@@ -63,11 +63,7 @@ This ansible script performs the following tasks:
 In order to be able to connect to MySQL you should run the following commands.
 
 ```
-# docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                              NAMES
-5afda1dcfec3        mysql               "/sbin/my_init"     8 minutes ago       Up 8 minutes        0.0.0.0:3360->3360/tcp, 3306/tcp   mysql
-
-# docker exec -i -t 5afda1dcfec3 /bin/bash
+# docker exec -i -t mydb /bin/bash
 
 root@5afda1dcfec3:/# mysql -p
 
@@ -94,15 +90,10 @@ mysql>
 Following commands will create the icinga database and all tables necessary to it. 
 
 ```
-# docker ps
-CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                    NAMES
-ebda5f8e04c5        httpd               "/bin/sh -c '/usr/sb   About an hour ago   Up About an hour    80/tcp                   condescending_yalow
-b86b18d99853        mysql               "/sbin/my_init"        About an hour ago   Up About an hour    0.0.0.0:3306->3306/tcp   admiring_euclid
-
-# docker exec -i -t b86b18d99853 /bin/bash
+# docker exec -i -t mydb /bin/bash
 
 # cd /etc/mysql
-# mysql -proot -uroot < icinga_schema.sql
+# mysql -proot -uroot < icinga.sql
 # mysql -Dicinga -proot -uroot < icinga_schema.sql
 ```
 
@@ -117,3 +108,10 @@ To test the Daemon run the following command:
 ```
 # icinga --show-scheduling /etc/icinga/icinga.cfg
 ```
+
+## Crontab Jobs
+
+
+
+
+

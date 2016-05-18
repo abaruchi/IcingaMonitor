@@ -16,6 +16,6 @@ print (key)
 bucket = "icingabucket"
 
 if s3.upload_to_s3(AWS_ACCESS_KEY, AWS_ACCESS_SECRET_KEY, file, bucket, key):
-    print 'It worked!'
+    print 'File sent to S3'
 else:
-    print 'The upload failed...'
+    print 'The upload failed'
