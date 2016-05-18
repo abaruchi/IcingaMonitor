@@ -7,7 +7,6 @@
     password: $1$xyz$2Tf39Fny2BJdNPuwf7opJ.
     base_dir: "{{ BASE_DIR|default('/home/abaruchi/') }}"
 
-
   tasks:
     - name: Add user abaruchi in all hosts
       user: name=abaruchi shell=/bin/bash comment="Master User" password={{password}}
@@ -38,10 +37,6 @@
 
     - name: Clonning GIT repo
       git: repo=https://github.com/abaruchi/IcingaMonitor.git dest={{ base_dir }}/IsingaMonitor/
-
-    - name: Adjust Timezone to SaoPaulo in CentOS 7
-      command: timedatectl set-timezone America/Sao_Paulo
-      when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "7")
     
     - name: Adjust Timezone to SaoPaulo in CentOS 6
       file:
@@ -50,15 +45,6 @@
         state: link
       when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6")
 
-- hosts: nodes
-  user: centos
-  become: yes
-  become_user: root
-  vars:
-    base_dir: "{{ BASE_DIR|default('/home/abaruchi/') }}"
-
-
-  tasks:
     - name: Install packages from yum repos
       yum: name={{ item }} state=latest update_cache=no
       with_items:
@@ -70,7 +56,10 @@
     
     - name: Install python libs dependences
       pip: name=docker-py version=1.1.0
-    
+
+    - name: Install tinys3 to AWS Amazon S3
+      pip: name=tinys3
+
     - name: Start docker service
       service: name=docker state=started enabled=yes
          
@@ -82,5 +71,4 @@
       
     - name: Build or Check HTTPD Image
       docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/HTTPD" name="httpd" state=present
-
-         
+    
