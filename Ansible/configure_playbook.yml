@@ -67,7 +67,7 @@
       docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/MySQL" name="mysql" state=present
 
     - name: Start MySQL Image
-      docker: image="mysql" ports=0.0.0.0:3306:3306 command="/sbin/my_init --enable-insecure-key" state=started
+      docker: image="mysql" ports=0.0.0.0:3306:3306 command="/sbin/my_init" state=started
       
     - name: Build or Check HTTPD Image
       docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/HTTPD" name="httpd" state=present
