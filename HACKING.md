@@ -17,16 +17,17 @@ in all servers (when using Red Hat based distros);
 
 ## Clone Git
 First step is to clone our git repository into any directory. For instance, we 
-are going to use centos home.
+are going to use root home directory.
 
 ```
-$ cd ~centos
+$ cd ~root/
 $ git clone https://github.com/abaruchi/IcingaMonitor.git
 ```
 
 ## Ansible Ping Test
 Before start with the installation procedure, please, run the following command to 
 test ansible connection between hosts (amazon and localhost).
+Please, remember to update the file `Ansible/hosts` with the proper IP or Hostnames.
 
 ```
 # pwd
@@ -43,4 +44,16 @@ ec2-52-203-154-4.compute-1.amazonaws.com | SUCCESS => {
     "ping": "pong"
 }
 ```
+
+## Running Ansible
+
+Once you clone the git repository and all hosts are reachable, run the playbook as following:
+
+```
+# ansible-playbook -v configure_playbook.yml
+```
+It will deploy two docker with MySQL and Apache web server. Also, it make a basic installation
+of the Icinga 
+
+
 
