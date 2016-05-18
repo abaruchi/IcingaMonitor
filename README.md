@@ -36,6 +36,6 @@ The following list of technical specifications should be adhered to
 
 * So there are two major parts to deliver
 
-⋅⋅* A deployment manual with detailed step by step process of creating the whole system. It can include other references.
+  * A deployment manual with detailed step by step process of creating the whole system. It can include other references.
 
-⋅⋅* Scripts and code for automating the infrastructure and centralized logging
+  * Scripts and code for automating the infrastructure and centralized logging
