@@ -7,7 +7,7 @@ port = 3360
 
 [mysqld]
 port = 3360
-bind-address = 0.0.0.0
+#bind-address = 0.0.0.0
 #socket		= @MYSQL_UNIX_ADDR@
 skip-external-locking
 key_buffer_size = 16K
