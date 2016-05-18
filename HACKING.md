@@ -5,7 +5,7 @@ the docker host which collects and send docker log files to Amazon S3.
 
 
 # Premisses
-* S3 Amazon proper configured;
+* S3 Amazon proper configured (with an valid Access Key);
 * Ansible is already [installed](http://docs.ansible.com/ansible/intro_installation.html) in all VMs and the user centos (with sudo privilegies) are
 configured;
 * EPEL repository [installed](https://support.rackspace.com/how-to/install-epel-and-additional-repositories-on-centos-and-red-hat/) 
@@ -46,8 +46,17 @@ Once you clone the git repository and all hosts are reachable, run the playbook 
 ```
 # ansible-playbook -v configure_playbook.yml
 ```
-It will deploy two docker with MySQL and Apache web server. Also, it make a basic installation
-of the Icinga.
+This ansible script performs the following tasks:
+
+* Run some local configurations:
+  * User creation with root privilegies;
+  * SSH Configuration;
+  * DNS and Timezone Configuration;
+  * Packages and Libs Installation;
+  * Clone this GIT repository.
+* Install two dockers (one running httpd and the other one running MySQL);
+* Prepare Icinga daemon;
+* Install cron entries.
 
 ## MySQL Remote Connection
 
@@ -62,7 +71,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 root@5afda1dcfec3:/# mysql -p
 
-Enter password: \<type_password\>
+Enter password: <type_password>
 mysql> GRANT ALL ON *.* to root@'%' IDENTIFIED BY 'root';
 mysql> FLUSH PRIVILEGES;
 mysql> quit
@@ -86,10 +95,11 @@ Following commands will create the icinga database and all tables necessary to i
 
 ```
 # docker ps
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                              NAMES
-5afda1dcfec3        mysql               "/sbin/my_init"     8 minutes ago       Up 8 minutes        0.0.0.0:3360->3360/tcp, 3306/tcp   mysql
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                    NAMES
+ebda5f8e04c5        httpd               "/bin/sh -c '/usr/sb   About an hour ago   Up About an hour    80/tcp                   condescending_yalow
+b86b18d99853        mysql               "/sbin/my_init"        About an hour ago   Up About an hour    0.0.0.0:3306->3306/tcp   admiring_euclid
 
-# docker exec -i -t 5afda1dcfec3 /bin/bash
+# docker exec -i -t b86b18d99853 /bin/bash
 
 # cd /etc/mysql
 # mysql -proot -uroot < icinga_schema.sql
