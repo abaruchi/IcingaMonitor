@@ -1,4 +1,5 @@
 import os
+import time
 
 import boto
 from boto.s3.key import Key
@@ -11,8 +12,6 @@ def upload_to_s3(aws_access_key_id, aws_secret_access_key, file, bucket, key,
     try:
         size = os.fstat(file.fileno()).st_size
     except:
-        # Not all file objects implement fileno(),
-        # so we fall back on this
         file.seek(0, os.SEEK_END)
         size = file.tell()
 
@@ -25,8 +24,6 @@ def upload_to_s3(aws_access_key_id, aws_secret_access_key, file, bucket, key,
     sent = k.set_contents_from_file(file, cb=callback, md5=md5,
                                     reduced_redundancy=reduced_redundancy,
                                     rewind=True)
-
-    # Rewind for later use
     file.seek(0)
 
     if sent == size:
@@ -37,9 +34,11 @@ AWS_ACCESS_KEY = 'AKIAI2VT7X6ANQ3O73RA'
 AWS_ACCESS_SECRET_KEY = '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'
 
 file = open('testing_s3.txt', 'r+')
+timestamp = time.strftime("%d_%m_%Y")
 
-key = file.name
-bucket = 'icingabucket'
+key = "backup/"+timestamp+"/"+file.name
+print (key)
+bucket = "icingabucket"
 
 if upload_to_s3(AWS_ACCESS_KEY, AWS_ACCESS_SECRET_KEY, file, bucket, key):
     print 'It worked!'

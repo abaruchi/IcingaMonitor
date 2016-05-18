@@ -107,8 +107,3 @@ To test the Daemon run the following command:
 ```
 # icinga --show-scheduling /etc/icinga/icinga.cfg
 ```
-
-
-
-
-

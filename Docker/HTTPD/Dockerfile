@@ -1,4 +1,15 @@
-FROM httpd:2.4
+FROM fedora:20
 
-COPY ./public-html/ /usr/local/apache2/htdocs/
-COPY ./my-httpd.conf /usr/local/apache2/conf/httpd.conf
+# Install httpd
+RUN yum install -y httpd
+
+# Change the default docroot
+RUN sed -i 's|^DocumentRoot.*|DocumentRoot "/srv"|' /etc/httpd/conf/httpd.conf
+
+# Add in our custom httpd configuration.
+ADD extra.conf /etc/httpd/conf.d/root.conf
+
+EXPOSE 80
+
+# Start up httpd.
+ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
