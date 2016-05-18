@@ -79,7 +79,13 @@
       docker: image="httpd" name="myhttpd" ports=0.0.0.0:80:80 state=started
 
     - name: Copy cron script to root home dir
-      copy: src=../Scripts/Shell/copy_docker_files.sh dest=/root/ mode="a+x" 
-
+      copy: src=../Scripts/{{ item }} dest=/root/ mode="a+x" 
+      with_items:
+        - Shell/cron_job.sh
+        - Shell/copy_docker_files.sh
+        - Shell/make_backup.sh
+        - Python/bkp_file_upload.py
+        - Python/log_file_upload.py
+        
     - name: Create cron job to send files to S3
       cron: name="Job to copy log files to AWS S3." minute="0" hour="7" job="/root/copy_docker_files.sh"
