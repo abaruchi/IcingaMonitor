@@ -20,6 +20,9 @@
     - name: Allow SSH connections with password
       copy: src=./Templates/sshd_config dest=/etc/ssh/ owner=root group=root mode=644 backup=yes
 
+    - name: Install Icinga configuration file
+      copy: src=./Templates/ido2db.cfg dest=/etc/icinga/ owner=root group=root mode=644 backup=yes
+
     - name: Add Google DNS to all hosts
       lineinfile: dest=/etc/resolv.conf
         backup=yes
@@ -59,6 +62,9 @@
 
     - name: Install tinys3 to AWS Amazon S3
       pip: name=tinys3
+
+    - name: Install tinys3 to AWS Amazon S3
+      pip: name=boto
 
     - name: Start docker service
       service: name=docker state=started enabled=yes
