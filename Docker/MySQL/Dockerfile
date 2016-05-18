@@ -30,9 +30,6 @@ RUN chmod -R 755    /var/lib/mysql/
 
 ADD etc/my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
 RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
-RUN mysql -proot -uroot < /etc/mysql/icinga.sql
-RUN mysql -proot -uroot < /etc/mysql/icinga_schema.sql
-
 
 EXPOSE 3306
 # END MySQL Installation
