@@ -1,5 +1,2 @@
 [nodes]
 localhost
-
-[aws]
-ec2-52-203-154-4.compute-1.amazonaws.com
