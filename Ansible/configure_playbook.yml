@@ -76,8 +76,4 @@
       docker_image: path="{{ base_dir }}/IsingaMonitor/Docker/HTTPD" name="httpd" state=present
 
     - name: Start HTTP Image
-      docker: 
-        image: httpd 
-        state: started
-        expose:
-        - 80
+      docker: image="httpd" ports=0.0.0.0:3306:3306 state=started
