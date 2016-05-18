@@ -1,8 +1,11 @@
-import uploadS3 as s3
 import time as t
+import sys
 
-AWS_ACCESS_KEY = 'AKIAI2VT7X6ANQ3O73RA'
-AWS_ACCESS_SECRET_KEY = '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'
+import uploadS3 as s3
+
+# main
+AWS_ACCESS_KEY = sys.argv[1]
+AWS_ACCESS_SECRET_KEY = sys.argv[2]
 
 file = open('testing_s3.txt', 'r+')
 timestamp = t.strftime("%d_%m_%Y")
