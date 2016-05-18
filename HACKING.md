@@ -96,5 +96,19 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 # mysql -Dicinga -proot -uroot < icinga_schema.sql
 ```
 
+## Starting Icinga Daemon
+
+```
+# icinga -d /etc/icinga/icinga.cfg
+```
+
+To test the Daemon run the following command:
+
+```
+# icinga --show-scheduling /etc/icinga/icinga.cfg
+```
+
+
+
 
 
