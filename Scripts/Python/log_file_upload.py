@@ -9,8 +9,9 @@ AWS_ACCESS_SECRET_KEY = sys.argv[2]
 
 file = open('/tmp/docker_logfiles.tar.gz', 'rb')
 timestamp = t.strftime("%d_%m_%Y")
+file_name = docker_logfiles.tar.gz
 
-key = "logs/"+timestamp+"/"+file.name
+key = "logs/"+timestamp+"/"+file_name
 print (key)
 bucket = "icingabucket"
 
