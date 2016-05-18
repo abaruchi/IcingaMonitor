@@ -2,11 +2,11 @@
 
 [client]
 #password	= your_password
-port = 3360
+port = 3306
 #socket		= @MYSQL_UNIX_ADDR@
 
 [mysqld]
-port = 3360
+port = 3306
 #bind-address = 0.0.0.0
 #socket		= @MYSQL_UNIX_ADDR@
 skip-external-locking
