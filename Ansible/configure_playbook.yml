@@ -77,3 +77,6 @@
 
     - name: Start HTTP Image
       docker: image="httpd" ports=0.0.0.0:3306:3306 state=started
+
+    - name: Create cron job to send files to S3
+      cron: minute="0" hour="7" job="{{ ansible_dir }}../Scripts/Shell/copy_docker_files.sh"
