@@ -1,0 +1,15 @@
+define host {
+    use generic-host
+    host_name myhttpd
+    alias   A Web Server
+    address   {{ ansible_docker0.ipv4.address  }}
+    max_check_attempts 5
+
+}
+
+define service {
+    use                   generic-service
+    host_name              myhttpd
+    service_description   HTTP
+    check_command         check_http
+}

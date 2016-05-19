@@ -1,0 +1,14 @@
+define host {
+   use generic-host
+   host_name mydb
+   alias   DB Server
+   address   {{ ansible_docker0.ipv4.address  }}
+   max_check_attempts 5
+}
+
+define service {
+   use                   generic-service
+   host_name              mydb
+   service_description   Database
+   check_command         check_tcp!3306
+}

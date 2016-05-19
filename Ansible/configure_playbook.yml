@@ -6,6 +6,7 @@
   vars:
     password: $1$xyz$2Tf39Fny2BJdNPuwf7opJ.
     base_dir: "{{ BASE_DIR|default('/home/abaruchi/') }}"
+    icinga_conf: '/etc/icinga/conf.d'
 
   tasks:
     - name: Add user abaruchi in all hosts
@@ -55,6 +56,7 @@
         - icinga
         - icinga-gui 
         - icinga-doc 
+        - nagios-plugins
         - icinga-idoutils-libdbi-mysql
     
     - name: Install python libs dependences
@@ -62,6 +64,15 @@
 
     - name: Install boto python lib to connect to AWS S3
       pip: name=boto
+
+    - name: Download Icinga Plugins
+      get_url: url=https://www.monitoring-plugins.org/download/monitoring-plugins-2.1.2.tar.gz dest=/tmp/
+    
+    - name: Create HTTP Icinga Conf file
+      template: src=./Templates/myhttpd.j2 dest={{ icinga_conf }}
+
+    - name: Create MySQL Icinga Conf file
+      template: src=./Templates/mydb.j2 dest={{ icinga_conf }}
 
     - name: Start docker service
       service: name=docker state=started enabled=yes
