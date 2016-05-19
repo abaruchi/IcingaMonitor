@@ -8,7 +8,8 @@
   3. [Running Ansible](#running-ansible)
   4. [MySQL Remote Connection](#mysql-remote-connection)
   5. [Icinga Database](#icinga-database)
-  6. [Starting Icinga Daemon](#starting-icinga-daemon)
+  6. [Icinga Plugins](#icinga-plugins) 
+  7. [Starting Icinga Daemon](#starting-icinga-daemon)
 
 # Introduction
 This documentation refers to the installation and configuration of a MySQL and an 
