@@ -109,7 +109,24 @@ Following commands will create the icinga database and all tables necessary to i
 # mysql -Dicinga -proot -uroot < icinga_schema.sql
 ```
 
+## Icinga Plugins
+
+Our ansible playbook downloads the tar package of plugins inside /tmp. To install it run 
+the following commands:
+
+```
+# cd /tmp/
+# tar xzvf monitoring-plugins-2.1.2.tar.gz ; cd monitoring-plugins-2.1.2/
+# ./configure --prefix=/tmp/ && make && make install 
+# cd /tmp/libexec
+# find . -print | cpio -dumpv /usr/lib64/nagios/plugins
+```
+
 ## Starting Icinga Daemon
+
+Our ansible playbook creates two configuration files and put it inside `/etc/icinga/objects`. These
+files are configured to provide basic monitoring for the apache and mysql (use `check_http` and 
+`check_mysql` plugins).
 
 ```
 # icinga -d /etc/icinga/icinga.cfg
@@ -120,3 +137,6 @@ To test the Daemon run the following command:
 ```
 # icinga --show-scheduling /etc/icinga/icinga.cfg
 ```
+
+
+
