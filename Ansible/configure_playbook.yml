@@ -69,10 +69,10 @@
       get_url: url=https://www.monitoring-plugins.org/download/monitoring-plugins-2.1.2.tar.gz dest=/tmp/
     
     - name: Create HTTP Icinga Conf file
-      template: src=./Templates/myhttpd.j2 dest={{ icinga_conf }}
+      template: src=./Templates/myhttpd.j2 dest={{ icinga_conf }}/myhttp.conf
 
     - name: Create MySQL Icinga Conf file
-      template: src=./Templates/mydb.j2 dest={{ icinga_conf }}
+      template: src=./Templates/mydb.j2 dest={{ icinga_conf }}/mydb.conf
 
     - name: Start docker service
       service: name=docker state=started enabled=yes
